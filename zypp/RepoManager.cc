@@ -187,6 +187,7 @@ namespace zypp
     oinfo.setFilepath( updatedRepo.filepath() );
     oinfo.setMetadataPath( zyppng::rawcache_path_for_repoinfo( _pimpl->ngMgr().options(), updatedRepo ).unwrap() );
     oinfo.setPackagesPath( zyppng::packagescache_path_for_repoinfo( _pimpl->ngMgr().options(), updatedRepo ).unwrap() );
+    oinfo.setPredownloadPath( zyppng::predownloadcache_path_for_repoinfo( _pimpl->ngMgr().options(), updatedRepo ).unwrap() );
   }
 
   void RepoManager::addRepositories( const Url &url, const ProgressData::ReceiverFnc & progressrcv )
@@ -208,6 +209,7 @@ namespace zypp
     oinfo.setFilepath( updated.filepath());
     oinfo.setMetadataPath( zyppng::rawcache_path_for_repoinfo( _pimpl->ngMgr().options(), updated ).unwrap() );
     oinfo.setPackagesPath( zyppng::packagescache_path_for_repoinfo( _pimpl->ngMgr().options(), updated ).unwrap() );
+    oinfo.setPredownloadPath( zyppng::predownloadcache_path_for_repoinfo( _pimpl->ngMgr().options(), updated ).unwrap() );
   }
 
   RepoInfo RepoManager::getRepositoryInfo( const std::string &alias, const ProgressData::ReceiverFnc & progressrcv )

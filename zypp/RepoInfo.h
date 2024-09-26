@@ -278,11 +278,21 @@ namespace zypp
        */
       Pathname packagesPath() const;
       /**
+       * \short Path where this repo packages are cached
+       */
+      Pathname predownloadPath() const;
+      /**
        * \short set the path where the local packages are stored
        *
        * \param path directory path
        */
       void setPackagesPath( const Pathname &path );
+      /**
+       * \short set the path where the packages may be stored by plugins
+       *
+       * \param path directory path
+       */
+      void setPredownloadPath( const Pathname &path );
 
 
       /** \name Repository gpgchecks
