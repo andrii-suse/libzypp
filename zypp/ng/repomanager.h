@@ -199,6 +199,16 @@ namespace zyppng {
   }
 
   /**
+     * \short Calculates the predownload cache path for a repository
+     */
+  inline expected<zypp::Pathname> predownloadcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+  {
+    using namespace zyppng::operators;
+    return assert_alias(info) |
+    and_then([&](){ return make_expected_success(isTmpRepo( info ) ? info.predownloadPath() : opt.repoPackagesCachePath.extend( std::string(".todo")) / info.escaped_alias()); });
+  }
+
+  /**
      * \short Calculates the solv cache path for a repository
      */
   inline expected<zypp::Pathname> solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )

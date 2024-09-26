@@ -593,6 +593,7 @@ namespace zyppng
       tosave.setFilepath(repofile);
       tosave.setMetadataPath( rawcache_path_for_repoinfo( _options, tosave ).unwrap() );
       tosave.setPackagesPath( packagescache_path_for_repoinfo( _options, tosave ).unwrap() );
+      tosave.setPredownloadPath( predownloadcache_path_for_repoinfo( _options, tosave ).unwrap() );
       reposManip().insert(tosave);
 
       // check for credentials in Urls
@@ -763,6 +764,7 @@ namespace zyppng
       newinfo.setFilepath(toedit.filepath());
       newinfo.setMetadataPath( rawcache_path_for_repoinfo( _options, newinfo ).unwrap() );
       newinfo.setPackagesPath( packagescache_path_for_repoinfo( _options, newinfo ).unwrap() );
+      newinfo.setPredownloadPath( predownloadcache_path_for_repoinfo( _options, newinfo ).unwrap() );
 
       ProgressObserver::increase( myProgress );
 
@@ -1406,6 +1408,7 @@ namespace zyppng
         repoInfo.setMetadataPath( rawcache_path_for_repoinfo(_options, repoInfo).unwrap() );
         // set the downloaded packages path for the repo
         repoInfo.setPackagesPath( packagescache_path_for_repoinfo(_options, repoInfo).unwrap() );
+        repoInfo.setPredownloadPath( predownloadcache_path_for_repoinfo(_options, repoInfo).unwrap() );
         // remember it
         _reposX.insert( repoInfo );	// direct access via _reposX in ctor! no reposManip.
 

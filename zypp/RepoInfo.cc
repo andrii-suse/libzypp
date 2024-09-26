@@ -338,6 +338,9 @@ namespace zypp
     void packagesPath( Pathname new_r )
     { _packagesPath = std::move( new_r ); }
 
+    void predownloadPath( Pathname new_r )
+    { _predownloadPath = std::move( new_r ); }
+
     bool usesAutoMetadataPaths() const
     { return str::hasSuffix( _metadataPath.asString(), "/%AUTO%" ); }
 
@@ -355,12 +358,18 @@ namespace zypp
       return _packagesPath;
     }
 
+    Pathname predownloadPath() const
+    {
+      return _predownloadPath;
+    }
+
     DefaultIntegral<unsigned,defaultPriority> priority;
     mutable bool emptybaseurls;
 
   private:
     Pathname _metadataPath;
     Pathname _packagesPath;
+    Pathname _predownloadPath;
 
     mutable RepoVariablesReplacedUrlList _baseUrls;
     mutable std::pair<FalseBool, std::set<std::string> > _keywords;
@@ -578,6 +587,9 @@ namespace zypp
   void RepoInfo::setPackagesPath( const Pathname &path )
   { _pimpl->packagesPath( path ); }
 
+  void RepoInfo::setPredownloadPath( const Pathname &path )
+  { _pimpl->predownloadPath( path ); }
+
   void RepoInfo::setKeepPackages( bool keep )
   { _pimpl->keeppackages = keep; }
 
@@ -595,6 +607,9 @@ namespace zypp
 
   Pathname RepoInfo::packagesPath() const
   { return _pimpl->packagesPath(); }
+
+  Pathname RepoInfo::predownloadPath() const
+  { return _pimpl->predownloadPath(); }
 
   bool RepoInfo::usesAutoMetadataPaths() const
   { return _pimpl->usesAutoMetadataPaths(); }
@@ -834,11 +849,12 @@ namespace zypp
     if ( ! indeterminate(_pimpl->keeppackages) )
       str << "- keeppackages: " << keepPackages() << std::endl;
 
-    strif( "- service     : ", service() );
-    strif( "- targetdistro: ", targetDistribution() );
-    strif( "- filePath:     ", filepath().asString() );
-    strif( "- metadataPath: ", metadataPath().asString() );
-    strif( "- packagesPath: ", packagesPath().asString() );
+    strif( "- service     :    ", service() );
+    strif( "- targetdistro:    ", targetDistribution() );
+    strif( "- filePath:        ", filepath().asString() );
+    strif( "- metadataPath:    ", metadataPath().asString() );
+    strif( "- packagesPath:    ", packagesPath().asString() );
+    strif( "- predownloadPath: ", predownloadPath().asString() );
 
     return str;
   }

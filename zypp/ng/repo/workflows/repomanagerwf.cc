@@ -1001,10 +1001,15 @@ namespace zyppng::RepoManagerWorkflow {
             const auto &pckCachePath = packagescache_path_for_repoinfo( options, *it ) ;
             if ( !pckCachePath ) return expected<void>::error(pckCachePath.error());
 
+            const auto &predownloadCachePath = predownloadcache_path_for_repoinfo( options, *it ) ;
+
             it->dumpAsIniOn(file);
             it->setFilepath(repofile);
             it->setMetadataPath( *rawCachePath );
             it->setPackagesPath( *pckCachePath );
+            if ( !predownloadCachePath->empty() )
+                it->setPredownloadPath( *predownloadCachePath );
+
             _repoMgrRef->reposManip().insert(*it);
 
             zypp::HistoryLog( _repoMgrRef->options().rootDir).addRepository(*it);

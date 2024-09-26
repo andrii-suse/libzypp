@@ -534,8 +534,10 @@ namespace zypp
 
       // get cached file (by checksum) or provide from media
       Pathname tmpFile = locateInCache( resource, destDir_r );
-      if ( tmpFile.empty() )
-      {
+
+      if ( !tmpFile.empty() ) {
+        MIL << "Found in cache, verifying..." << endl;
+      } else {
         MIL << "Not found in cache, retrieving..." << endl;
         tmpFile = media_r.provideFile( resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT );
         releaseFileGuard.reset( new MediaSetAccess::ReleaseFileGuard( media_r, resource ) ); // release it when we leave the block
